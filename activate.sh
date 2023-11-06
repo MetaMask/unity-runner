@@ -21,13 +21,9 @@ if [[ -n "$UNITY_LICENSE" ]]; then
   ## Activate license
   ##
   echo "Requesting activation"
-  xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-    /opt/Unity/Editor/Unity \
-      -batchmode \
-      -nographics \
-      -logFile /dev/stdout \
-      -quit \
-      -manualLicenseFile $FILE_PATH
+
+  unity-editor -batchmode -nographics -logFile /dev/stdout -quit -manualLicenseFile $FILE_PATH
+
   # This is expected to always exit with code 1 (both success and failure).
   # Convert to exit code 0 by echoing the current exit code.
   echo $?
@@ -38,19 +34,14 @@ if [[ -n "$UNITY_LICENSE" ]]; then
   ##
   echo "Verifying activation"
   # Run any command that requires activation to verify
-  xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-    /opt/Unity/Editor/Unity \
-      -batchmode \
-      -nographics \
-      -logFile /dev/stdout \
-      -quit
+  unity-editor -batchmode -nographics -logFile /dev/stdout -quit
 
   # Store the exit code from the verify command
   UNITY_EXIT_CODE=$?
 
   # Display information about the result
   if [ $UNITY_EXIT_CODE -eq 0 ]; then
-    echo "Activation (personal) complete."
+    echo "Activation complete."
   else
     echo "Unclassified error occured while trying to activate (personal) license."
     echo "Exit code was: $UNITY_EXIT_CODE"
@@ -61,7 +52,6 @@ if [[ -n "$UNITY_LICENSE" ]]; then
 
   # Exit with the code from the license verification step
   exit $UNITY_EXIT_CODE
-
 else
   #
   # PROFESSIONAL (SERIAL) LICENSE MODE
@@ -70,15 +60,7 @@ else
   #
   # Note: This is the preferred way for PROFESSIONAL LICENSES.
   #
-  xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
-    /opt/Unity/Editor/Unity \
-      -batchmode \
-      -nographics \
-      -logFile /dev/stdout \
-      -quit \
-      -serial "$UNITY_SERIAL" \
-      -username "$UNITY_EMAIL" \
-      -password "$UNITY_PASSWORD"
+  unity-editor -batchmode -nographics -logFile /dev/stdout -quit -serial "$UNITY_SERIAL" -username "$UNITY_EMAIL" -password "$UNITY_PASSWORD"
 
   # Store the exit code from the verify command
   UNITY_EXIT_CODE=$?
@@ -93,5 +75,4 @@ else
 
   # Exit with the code from the license verification step
   exit $UNITY_EXIT_CODE
-
 fi

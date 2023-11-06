@@ -9,7 +9,6 @@ inputs:
     required: false
     default: ''
     description: 'working directory'
-
   solution:
     description: "Project solution,  typically"
     required: false
@@ -23,19 +22,6 @@ inputs:
   projectName:
     description: "Specifies the name of the analyzed project in SonarQube"
     required: true
-  sonarHostname:
-    description: "The server URL"
-    default: "https://sonarcloud.io"
-    required: false
-  sonarOrganisation:
-    description: "Organisation"
-    required: true
-  beginArguments:
-    description: "Arguments to append to the begin command"
-    required: false
-  endArguments:
-    description: "Arguments to append to the end command"
-    required: false
     
 outputs:
   filePath:
