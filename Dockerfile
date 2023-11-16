@@ -1,4 +1,4 @@
-FROM windows-2021.3.32f1-windows-il2cpp-3.0.0
+FROM unityci/editor:windows-2021.3.32f1-windows-il2cpp-3.0.0
 
 LABEL "com.github.actions.name"="Unity Runner"
 LABEL "com.github.actions.description"="Run unity any Unity project."
