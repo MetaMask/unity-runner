@@ -13,6 +13,6 @@ COPY entrypoint.sh activate.sh request_activation.sh /
 
 RUN chmod +x /entrypoint.sh && \
     chmod +x /activate.sh && \
-    chmod +x /request_activation.sh &&
+    chmod +x /request_activation.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
